@@ -1,0 +1,32 @@
+@page "/"
+@inject NavigationManager NavManager
+
+<PageTitle>Hello</PageTitle>
+
+ArrowDown Component<br/>
+<ArrowDown/>
+<br/>
+<br/>
+BIGeneric Component <br/>
+With Parameters: Icon="cloud" Color="Red"<br/>
+<BIGeneric Icon="cloud" Color="Red"/>
+<br/>
+<br/>
+Breadcrumb Component <br/>
+With a List&lt;Link&gt; containing 3 links as the links parameter
+<Breadcrumb links="demoLinks" />
+
+
+@code{
+    public String DemoIcon { get; set; } = "bandaid";
+
+    public List<Link> demoLinks { get; set; } = new List<Link>
+    {
+        new Link { title = "Home", uriString = String.Empty },
+        new Link { title = "Demo", uriString = String.Empty },
+        new Link { title = "Crumbs", uriString = String.Empty }
+    };
+
+}
+    
+

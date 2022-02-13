@@ -1,0 +1,16 @@
+<span class="@ClassID" style="@StyleString" aria-label="@AccessibleLabel"></span>
+
+@code {
+    [Parameter, EditorRequired]
+    public String Icon { get; set; } = "x";
+    public String ClassID { get { return "oi oi-" + Icon; }}
+    [Parameter]
+    public Int32 EMSize { get; set; } = 2;
+    //Sets SVG fill parameter
+    [Parameter]
+    public String Color { get; set; } = "currentColor";
+    public String StyleString { get { return "font-size: " + EMSize + "em; color: " + Color + ";"; }}
+    [Parameter]
+    public String AccessibleLabel { get; set; }= "Graphical Icon";
+
+}

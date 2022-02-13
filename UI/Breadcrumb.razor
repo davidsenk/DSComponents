@@ -1,0 +1,34 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        @foreach(Link link in links)
+        {
+            breadcrumbClass = "breadcrumb-item";
+            @if(counter >= totalCount)
+            {
+                breadcrumbClass += " active";
+                
+            }
+            counter++;
+            @if(String.IsNullOrEmpty(link.uriString))
+            {
+                <li class="@breadcrumbClass">@link.title</li>
+            } 
+            else 
+            {
+                <li class="@breadcrumbClass"><a href="@link.uriString">@link.title</a></li>
+            }
+
+        }
+    </ol>
+</nav>
+
+
+@code{
+    String breadcrumbClass = String.Empty;
+    Int32 counter = 1;
+    Int32 totalCount {get { return links.Count; }}
+
+    [Parameter, EditorRequired]
+    public IReadOnlyList<Link> links { get; set; } = new List<Link>();
+
+}

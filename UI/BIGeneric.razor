@@ -1,0 +1,16 @@
+<i class="@ClassID" style="@StyleString" aria-label="@AccessibleLabel"></i>
+
+@code {
+    [Parameter, EditorRequired]
+    public String Icon { get; set; } = "exclamation-triangle";
+    public String ClassID { get { return "bi-" + Icon; }}
+    [Parameter]
+    public Int32 EMSize { get; set; } = 2;
+    //Sets SVG fill parameter
+    [Parameter]
+    public String Color { get; set; } = "currentColor";
+    public String StyleString { get { return "font-size: " + EMSize + "em; color: " + Color + ";"; }}
+    [Parameter]
+    public String AccessibleLabel { get; set; }= "Graphical Icon";
+
+}

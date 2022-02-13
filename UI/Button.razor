@@ -1,0 +1,57 @@
+
+
+@if(!AnchorButton){
+    <button type="button" class="@ButtonClass" data-toggle="@data_toggle" aria-haspopup="@aria_haspopup" aria-expanded="@aria_expanded" @onclick="@(async () => await OnSelected.InvokeAsync())">@ButtonText @if(dropdownCaret){<span class="caret"></span>}</button>
+}
+
+@if(AnchorButton){
+    <a href="@AnchorLink"><button type="button" class="@ButtonClass" data-toggle="@data_toggle" aria-haspopup="@aria_haspopup" aria-expanded="@aria_expanded" @onclick="@(async () => await OnSelected.InvokeAsync())">@ButtonText @if(dropdownCaret){<span class="caret"></span>}</button></a>
+}
+
+@code {
+    public enum ButtonTypes{
+        Primary,
+        Secondary,
+        Success,
+        Danger,
+        Warning,
+        Info,
+        Light,
+        Dark,
+        Link
+    }
+    [Parameter]
+    public Guid componentID { get; set; }= System.Guid.NewGuid();
+    [Parameter, EditorRequired]
+    public ButtonTypes ButtonType { get; set; } = ButtonTypes.Link;
+    [Parameter, EditorRequired]
+    public String ButtonText { get; set; } = String.Empty;
+    public String ButtonClass { get { return "btn " + "btn-" + ButtonType.ToString().ToLower() + _classExtras; }}
+    //Adds an <a></a> tag around the button to turn buttons into links
+    [Parameter]
+    public Boolean AnchorButton { get; set; } = false;
+    [Parameter]
+    public String AnchorLink { get; set; } = String.Empty;
+    [Parameter]
+    public EventCallback<Object> OnSelected { get; set; }
+    [Parameter]
+    public String classExtras { get; set; } = String.Empty;
+    String _classExtras { get {
+        if (String.IsNullOrEmpty(classExtras)) 
+        { 
+            return String.Empty; 
+        } else {
+            return " " + classExtras;
+        }
+         
+    }}
+    //HTML Flags Follow
+    [Parameter]
+    public String data_toggle { get; set; } = String.Empty;
+    [Parameter]
+    public String aria_haspopup { get; set; } = String.Empty;
+    [Parameter]
+    public String aria_expanded { get; set; } = String.Empty;
+    [Parameter]
+    public Boolean dropdownCaret { get; set; } = false;
+}

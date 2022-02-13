@@ -1,0 +1,28 @@
+<div class="dropdown">
+<Button ButtonType="buttonType" ButtonText = "Dropdown Test" componentID="@componentID" classExtras="dropdown-toggle" data_toggle="dropdown" aria_haspopup="true" aria_expanded="true" dropdownCaret=true />
+
+  <ul class="dropdown-menu" aria-labelledby="@componentID">
+      @foreach (Link link in links)
+      {
+          <li><a href="@link.uriString">@link.title</a></li>
+      }
+  </ul>
+</div>
+
+@code{
+    [Parameter]
+    public Guid componentID { get; set; }= System.Guid.NewGuid();
+    [Parameter, EditorRequired]
+    public List<Link> links { get; set; } = new List<Link>
+    { 
+        new Link { title = "Google", uriString = "https://www.google.com" },
+        new Link { title = "Apple", uriString = "https://www.apple.com" },
+        new Link { title = "Amazon", uriString = "https://www.amazon.com" }
+    };
+
+    [Parameter]
+    public Button.ButtonTypes buttonType { get; set; } = Button.ButtonTypes.Primary;
+    [Parameter]
+    public String buttonText { get; set; } = "Dropdown";
+
+}
